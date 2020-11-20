@@ -7,16 +7,14 @@ const bodyParser = require('body-parser') // se hace parse del body para pasarlo
 
 //app.use(bodyParser.urlencoded({ extended: false })) // analiza objecto JSON, haciendo parse desde la url
 app.use(bodyParser.json()) //middleware funciones que se disparan cada vez que pasa por estas lineas 
-
-const { router } = require('./routes/autenticacion') // hacemos uso del archivo de autenticacion 
-
 const config = require('./config/config') // como es el primer archivo configura las variables de entorno que requiere mi aplicaion
 
-
-
-
+const { router } = require('./routes/autenticacion') // hacemos uso del archivo de autenticacion 
+const { app: trazabilidad } = require('./routes/trazabilidad') 
 app.use(require('./routes/factura'))//middleware
+//middleware
 app.use(router)
+app.use( trazabilidad )
 
 
 app.listen(process.env.PORT,

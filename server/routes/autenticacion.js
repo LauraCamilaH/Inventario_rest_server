@@ -52,7 +52,10 @@ router.post("/login", async (req, res) => {
 
         if (!isMatch) return res.json({ mensaje: "Credenciales inválidas" }, 400);
         //console.log(process.env.JWT_SECRET);
-        const token = jwt.sign({ nombreUsuario: dbUser.nombreUsuario, correo: dbUser.correo },
+        console.log(dbUser)
+        
+        const token = jwt.sign({ nombreUsuario: dbUser.nombreUsuario, 
+            correo: dbUser.correo, idUser: dbUser.idusuario},
             process.env.JWT_SECRET);// firma el token genera_
 
         res.json({ token });//Se retorna Objeto usuario
